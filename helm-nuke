@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Description: Deletes everything in an helm release
+
+if [ "$1" = "" ]; then
+        echo "Error: Missing helm release name"
+        exit 1
+fi
+
+echo "Nuking helm release: $1"
+
+RELEASE="$1"
+helm del --debug "${RELEASE}" 
+kubectl delete pvc -l release="${RELEASE}"
+kubectl get secret | grep --color=auto "${RELEASE}" | grep --color=auto Opaque | grep --color=auto token | awk '{print $1}' | xargs kubectl delete secret
