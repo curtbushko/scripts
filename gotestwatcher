@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Watches a directory for changes in files and runs go test with a clear cache 
+# Requires watchexec program
+
+BPURPLE='\033[1;35m'      # Purple
+watchexec "echo \"${BPURPLE} ﭧ RUNNING TESTS${BPURPLE}\" && go test ./. -v -count=1"
