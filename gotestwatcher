@@ -4,4 +4,4 @@
 # Requires watchexec program
 
 BPURPLE='\033[1;35m'      # Purple
-watchexec "echo \"${BPURPLE} ﭧ RUNNING TESTS${BPURPLE}\" && go test ./. -v -count=1"
+watchexec "echo \"${BPURPLE} ﭧ RUNNING TESTS${BPURPLE}\" && go test ./... -v -count=1"
