@@ -4,4 +4,4 @@
 # Requires watchexec program
 
 BBLUE='\033[1;34m'        # Blue
-watchexec "echo \"${BBLUE}    RUNNING BUILD ${BLUE}\" && go build ."
+watchexec "echo \"${BBLUE}    RUNNING BUILD ${BBLUE}\" && go build ."
