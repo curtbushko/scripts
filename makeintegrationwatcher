@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Watches a directory for changes in files and runs go test with a clear cache 
+# Requires watchexec program
+
+BBLUE='\033[1;34m'        # Bold blue
+watchexec "echo \"${BBLUE}   RUNNING INTEGRATION\" && make integration"
