@@ -51,7 +51,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-Func Test_Run(t *testing.T) {
+func Test_Run(t *testing.T) {
 	cases := []struct {
 		name     string
 		actual   string
@@ -71,9 +71,7 @@ Func Test_Run(t *testing.T) {
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
 			got := run(c.actual)
-			if c.expected != got {
-				t.Errorf("expected %v, got %v", c.expected, got)
-			}
+			assert.Equal(t, c.expected, got)
 		})
 	}
 }
