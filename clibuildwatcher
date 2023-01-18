@@ -4,4 +4,4 @@
 # Requires watchexec program
 
 BBLUE='\033[1;34m'        # Blue
-watchexec "echo \"${BBLUE}[$(date -u +'%Y-%m-%dT%H:%M:%SZ')]   RUNNING BUILD ${BBLUE}\" && go build ."
+watchexec "echo \"${BBLUE}[$(date -u +'%Y-%m-%dT%H:%M:%SZ')]    RUNNING CLI BUILD ${BBLUE}\" && make cli-dev"
