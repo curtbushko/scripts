@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Shows the date of creation for all local images
+docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.CreatedAt}}\t{{.Size}}"
