@@ -1,4 +1,4 @@
 #!/bin/bash
 
 git fetch
-git switch $(git branch -v -a --sort=-committerdate | fzf --border=rounded --margin=50,5,5,2)
+git switch $(git branch -a --sort=-committerdate | fzf --border=rounded --margin=50,5,5,2)
