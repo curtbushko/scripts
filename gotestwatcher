@@ -1,7 +1,6 @@
 #!/bin/sh
 
-# Watches a directory for changes in files and runs go test with a clear cache 
-# Requires watchexec program
-
-BPURPLE='\033[1;35m'      # Purple
-watchexec "echo \"${BPURPLE}[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] ﭧ RUNNING TESTS${BPURPLE}\" && go test ./... -v -count=1"
+# Watches a directory for changes in files and runs go test with a clear cache
+BPURPLE='\033[1;35m' # Purple
+echo "${BPURPLE}[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] ﭧ RUNNING TESTS"
+gotestsum --watch --format=testname --packages="./..." -- -p 1
