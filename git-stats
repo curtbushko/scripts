@@ -10,8 +10,10 @@ gstat() {
 	git shortlog -sn --no-merges --since="${FROM}" --before="${TO}" | grep -v 'bot' | head -${COUNT}
 }
 
-gstat "7" "10"
+gstat "7" "5"
+gstat "14" "10"
 gstat "30" "10"
 gstat "60" "10"
 gstat "90" "10"
-gstat "365" "10"
+gstat "180" "10"
+gstat "365" "20"
