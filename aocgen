@@ -93,4 +93,4 @@ cd "$1"
 go mod init "$2"
 
 # Install the testify package for testing
-go get github.com/stretchr/testify
+go get github.com/stretchr/testify/require
