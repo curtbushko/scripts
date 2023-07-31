@@ -5,12 +5,16 @@
 # 	echo "Repo: $REPO"
 _pr-review() {
 	PR=$(
-		GH_FORCE_TTY=100% gh pr list |
+		GH_FORCE_TTY=100% gh pr list -s open -S user-review-requested:@me |
 			fzf --ansi --preview 'GH_FORCE_TTY=100% gh pr view {1}' \
 				--bind "j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up,q:abort" \
 				--preview-window=top:80% --header-lines 3 |
 			awk '{print $1}'
 	)
+
+	if [ -z "${PR}" ]; then
+		exit 0
+	fi
 
 	PR=${PR:1}
 	echo "[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] PR: ${PR}"
