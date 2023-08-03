@@ -22,7 +22,7 @@ _pr-review() {
 	echo "[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] Branch: ${BRANCH}"
 
 	mkdir -p reviews
-	git worktree add "reviews/${BRANCH}" "${BRANCH}"
+	git worktree add "reviews/${BRANCH}" -b "${BRANCH}"
 
 	echo "[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] Worktrees:"
 	git worktree list
