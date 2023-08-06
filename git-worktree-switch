@@ -6,7 +6,9 @@
 _wt-switch() {
 	WT=$(
 		git worktree list |
-			fzf --ansi --border-label="| Worktrees |" --height=25% --border=rounded --margin=2,2,2,2 --prompt "worktree: " \
+			fzf --ansi --border-label="| Worktrees |" --height=90% --border=rounded \
+				--margin=2,2,2,2 --prompt "worktree: " --preview-window=top:80% \
+				--preview='git log --oneline -n10 {2}' \
 				--bind "j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up,q:abort" |
 			awk '{print $1}'
 
