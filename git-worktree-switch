@@ -13,10 +13,9 @@ _wt-switch() {
 			awk '{print $1}'
 
 	)
-	if [ "${WT}" = "" ]; then
-		exit 0
+	if [ "${WT}" != "" ]; then
+		cd $WT
 	fi
-	cd $WT
 }
 
 _wt-switch
