@@ -1,15 +1,26 @@
 #!/bin/sh
 
-# Description: Deletes everything in an helm release
+# Description: Delete all helm things
 
-if [ "$1" = "" ]; then
-        echo "Error: Missing helm release name"
-        exit 1
-fi
-
-echo "Nuking helm release: $1"
-
-RELEASE="$1"
-helm del --debug "${RELEASE}" 
-kubectl delete pvc -l release="${RELEASE}"
-kubectl get secret | grep --color=auto "${RELEASE}" | grep --color=auto Opaque | grep --color=auto token | awk '{print $1}' | xargs kubectl delete secret
+helm ls --all --short | xargs -L1 helm delete
+kubectl patch crd/serviceintentions.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/servicedefaults.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl delete --all jobs
+kubectl delete --all statefulsets
+kubectl delete --all daemonsets
+kubectl delete --all replicasets
+kubectl delete --all deployments
+kubectl delete --all services
+kubectl delete --all pvc
+kubectl delete --all secrets
+kubectl delete ns ns1
+kubectl delete ns ns2
+kubectl delete ns vault
+kubectl patch crd/ingressgateways.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/meshes.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/proxydefaults.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/serviceresolvers.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/servicerouters.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/servicesplitters.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/terminatinggateways.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl get all
