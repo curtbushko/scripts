@@ -15,7 +15,7 @@ _git-worktree-checkout() {
 	if [ "${BRANCH}" != "" ]; then
 		BRANCH=$(echo ${BRANCH} | tr -d '[:space:]' | sed 's^origin\/^^g')
 		echo "[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] Branch: ${BRANCH}"
-		git worktree add "${BRANCH}" -b "${BRANCH}" "origin/${BRANCH}"
+		git worktree add "${BRANCH}" -B "${BRANCH}" "origin/${BRANCH}"
 		echo "[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] Worktrees:"
 		git worktree list
 	fi

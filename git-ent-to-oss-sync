@@ -1,0 +1,74 @@
+#!/bin/bash
+
+_gitenttoosssync() {
+	SRC_REPO=/Users/curtbushko/workspace/github.com/hashicorp/sync/consul-enterprise
+	DEST_REPO=/Users/curtbushko/workspace/github.com/hashicorp/sync/consul
+	PR_SCRIPT="build-support/scripts/auto-ce-pr.sh"
+
+	echo "[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] Syncing changes from ${SRC_REPO} to ${DEST_REPO}"
+	read -p "Continue (y/n)?" CHOICE
+	case "${CHOICE}" in
+	y | Y) echo "Continuing..." ;;
+	n | N | *)
+		echo "Exiting..."
+		exit 0
+		;;
+	esac
+
+	echo "[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] Updating both repos..."
+	cd ${SRC_REPO}
+	git checkout main
+	git pull
+	cd ${DEST_REPO}
+	git checkout main
+	git pull
+
+	cd ${SRC_REPO}
+	SRC_BRANCH=$(
+		git branch -r --sort=-committerdate |
+			fzf --ansi --border-label="| Branches |" --height=90% --border=rounded \
+				--margin=2,2,2,2 --prompt "Source branches: " --preview-window=top:40% \
+				--preview='git log --oneline -n10 {1}' \
+				--bind "j:down,k:up,ctrl-j:preview-down,ctrl-k:preview-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up"
+	)
+
+	if [ "${SRC_BRANCH}" != "" ]; then
+		SRC_BRANCH=$(echo ${SRC_BRANCH} | tr -d '[:space:]')
+		DEST_BRANCH=$(echo ${SRC_BRANCH} | sed 's^origin\/^^g')
+		echo "[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] Source Branch: ${SRC_BRANCH}"
+		echo "[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] Dest Branch: ${DEST_BRANCH}"
+	else
+		exit 0
+	fi
+
+	read -p "Continue (y/n)?" CHOICE
+	case "${CHOICE}" in
+	y | Y) echo "Continuing..." ;;
+	n | N | *)
+		echo "Exiting..."
+		exit 0
+		;;
+	esac
+
+	echo "[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] Checking out dest branch: ${DEST_BRANCH}"
+	git branch -D "${DEST_BRANCH}" || true
+	git checkout -b "${DEST_BRANCH}"
+
+	echo "[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] Running ${PR_SCRIPT} script in ${SRC_REPO}"
+	read -p "Continue (y/n)?" CHOICE
+	case "${CHOICE}" in
+	y | Y) echo "Continuing..." ;;
+	n | N | *)
+		echo "Exiting..."
+		exit 0
+		;;
+	esac
+
+	cd ${SRC_REPO}
+	./${PR_SCRIPT} -b "${SRC_BRANCH}" "${DEST_REPO}"
+
+	echo "[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] Finished. No push and make a PR."
+	cd ${DEST_REPO}
+}
+
+_gitenttoosssync "$@"
