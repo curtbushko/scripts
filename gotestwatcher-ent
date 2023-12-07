@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Watches a directory for changes in files and runs go test with a clear cache
+BPURPLE='\033[1;35m' # Purple
+echo "${BPURPLE}[$(date -u +'%Y-%m-%dT%H:%M:%SZ')] ﭧ RUNNING ENTERPRISE TESTS"
+export TEST_LOG_LEVEL=error
+#gotestsum --format=testname --watch -- -failfast -count=1 -tags=enterprise -run TestReconcileUpdateEndpoint
+gotestsum --format=testname --watch -- -failfast -count=1 -tags=enterprise
