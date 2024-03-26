@@ -44,7 +44,6 @@ kubectl patch crd/routeretryfilters.consul.hashicorp.com -p '{"metadata":{"final
 kubectl patch crd/routetimeoutfilters.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
 kubectl patch crd/tcproutes.mesh.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
 kubectl patch crd/trafficpermissions.auth.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
-
 kubectl delete crd/servicedefaults.consul.hashicorp.com
 kubectl delete crd/serviceintentions.consul.hashicorp.com
 kubectl delete crd/ingressgateways.consul.hashicorp.com
