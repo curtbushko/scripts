@@ -29,6 +29,22 @@ kubectl patch crd/gatewayclassconfigs.consul.hashicorp.com -p '{"metadata":{"fin
 kubectl patch crd/jwtproviders.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
 kubectl patch crd/meshservices.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
 kubectl patch crd/samenessgroups.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/apigateways.mesh.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/exportedservices.multicluster.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/gatewayclassconfigs.mesh.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/gatewayclasses.mesh.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/gatewaypolicies.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/grpcroutes.mesh.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/httproutes.mesh.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/meshconfigurations.mesh.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/meshgateways.mesh.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/proxyconfigurations.mesh.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/routeauthfilters.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/routeretryfilters.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/routetimeoutfilters.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/tcproutes.mesh.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/trafficpermissions.auth.consul.hashicorp.com -p '{"metadata":{"finalizers":[]}}' --type=merge
+
 kubectl delete crd/servicedefaults.consul.hashicorp.com
 kubectl delete crd/serviceintentions.consul.hashicorp.com
 kubectl delete crd/ingressgateways.consul.hashicorp.com
@@ -44,3 +60,35 @@ kubectl delete crd/gatewayclassconfigs.consul.hashicorp.com
 kubectl delete crd/jwtproviders.consul.hashicorp.com
 kubectl delete crd/meshservices.consul.hashicorp.com
 kubectl delete crd/samenessgroups.consul.hashicorp.com
+kubectl delete crd/apigateways.mesh.consul.hashicorp.com
+kubectl delete crd/exportedservices.multicluster.consul.hashicorp.com
+kubectl delete crd/gatewayclassconfigs.mesh.consul.hashicorp.com
+kubectl delete crd/gatewayclasses.mesh.consul.hashicorp.com
+kubectl delete crd/gatewaypolicies.consul.hashicorp.com
+kubectl delete crd/grpcroutes.mesh.consul.hashicorp.com
+kubectl delete crd/httproutes.mesh.consul.hashicorp.com
+kubectl delete crd/meshconfigurations.mesh.consul.hashicorp.com
+kubectl delete crd/meshgateways.mesh.consul.hashicorp.com
+kubectl delete crd/proxyconfigurations.mesh.consul.hashicorp.com
+kubectl delete crd/routeauthfilters.consul.hashicorp.com
+kubectl delete crd/routeretryfilters.consul.hashicorp.com
+kubectl delete crd/routetimeoutfilters.consul.hashicorp.com
+kubectl delete crd/tcproutes.mesh.consul.hashicorp.com
+kubectl delete crd/trafficpermissions.auth.consul.hashicorp.com
+# Delete non-consul gateway CRDs
+kubectl patch crd/gatewayclasses.gateway.networking.k8s.io -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/gateways.gateway.networking.k8s.io -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/grpcroutes.gateway.networking.k8s.io -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/httproutes.gateway.networking.k8s.io -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/referencegrants.gateway.networking.k8s.io -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/tcproutes.gateway.networking.k8s.io -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/tlsroutes.gateway.networking.k8s.io -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl patch crd/udproutes.gateway.networking.k8s.io -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl delete crd/gatewayclasses.gateway.networking.k8s.io
+kubectl delete crd/gateways.gateway.networking.k8s.io
+kubectl delete crd/grpcroutes.gateway.networking.k8s.io
+kubectl delete crd/httproutes.gateway.networking.k8s.io
+kubectl delete crd/referencegrants.gateway.networking.k8s.io
+kubectl delete crd/tcproutes.gateway.networking.k8s.io
+kubectl delete crd/tlsroutes.gateway.networking.k8s.io
+kubectl delete crd/udproutes.gateway.networking.k8s.io
