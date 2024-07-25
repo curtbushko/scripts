@@ -32,3 +32,5 @@ git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
 # Gets all branches from origin
 #git fetch origin
+
+git worktree add main
